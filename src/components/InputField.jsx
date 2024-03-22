@@ -8,6 +8,7 @@ export default function InputField(){
     function shortenLink(){
         fetch('https://cleanuri.com/api/v1/shorten',  {
             method: 'POST',
+            mode: 'no-cors',
             headers: {
               'Content-Type': 'applicaition/json', 
             },
