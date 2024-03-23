@@ -5,22 +5,24 @@ export default function InputField(){
 
     const [linkInput, setLinkInput] = useState('')
 
-    function shortenLink(){
-        fetch('https://cleanuri.com/api/v1/shorten',  {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-              'Content-Type': 'applicaition/json', 
-            },
-            body: JSON.stringify({ url: linkInput }) 
-          })
-        .then(res => res.json())
-        .then(data => console.log(data))
-        
-        
+    async function shortenLink() {
+      const response = await fetch('https://api-ssl.bitly.com/v4/shorten', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer c1eef6ca942ade353d0b45b71723f2b489b1a796`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          long_url: linkInput
+        })
+      });
+      
+      const data = await response.json();
+      console.log(data.link);
+      return data;
     }
-    
-    
+
+
     return (
         <div className="input-field">
                 <input type="text" 
